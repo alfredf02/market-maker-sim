@@ -55,3 +55,51 @@ def plot_final_pnl_histogram(strategy_experiments_map, bins=DEFAULT_HIST_BINS):
     plt.ylabel("Frequency")
     plt.legend()
     plt.show()
+
+def plot_parameter_sweep_metric(sweep_result, metric_name):
+    parameter_name = sweep_result["parameter_name"]
+    results = sweep_result["results"]
+
+    strategy_to_x = {}
+    strategy_to_y = {}
+
+    for parameter_value, summary_table in results.items():
+        for strategy_name, summary in summary_table.items():
+            if strategy_name not in strategy_to_x:
+                strategy_to_x[strategy_name] = []
+                strategy_to_y[strategy_name] = []
+
+            strategy_to_x[strategy_name].append(parameter_value)
+            strategy_to_y[strategy_name].append(summary[metric_name])
+
+    plt.figure()
+
+    for strategy_name in strategy_to_x:
+        label = strategy_name.replace("_", " ").title()
+        plt.plot(strategy_to_x[strategy_name], strategy_to_y[strategy_name], marker="o", label=label)
+
+    plt.title(f"{metric_name} vs {parameter_name}")
+    plt.xlabel(parameter_name)
+    plt.ylabel(metric_name)
+    plt.legend()
+    plt.show()
+
+def plot_mid_price_paths(strategy_results_map):
+    plt.figure()
+
+    for label, result in strategy_results_map.items():
+        plt.plot(result["mids"], label=label)
+
+    plt.title("Mid Price Path")
+    plt.xlabel("Time Step")
+    plt.ylabel("Mid Price")
+    plt.legend()
+    plt.show()
+
+def plot_adverse_drift_path(result):
+    plt.figure()
+    plt.plot(result["adverse_drifts"])
+    plt.title("Adverse Drift Over Time")
+    plt.xlabel("Time Step")
+    plt.ylabel("Adverse Drift")
+    plt.show()
