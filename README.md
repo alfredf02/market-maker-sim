@@ -263,15 +263,11 @@ Suggested charts for portfolio screenshots:
 - Mean max absolute inventory vs. spread
 - Mid-price / adverse drift path when adverse selection is enabled
 
-Once saved, add them here using markdown image links:
-
-```md
 ![Sample PnL Comparison](images/pnl_comparison.png)
 ![Sample Inventory Comparison](images/inventory_comparison.png)
 ![Final PnL Histogram](images/histogram_final_pnl.png)
 ![PnL for Spread Parameter Sweep](images/mean_final_pnl_spread.png)
 ![Inventory for Spread Parameter Sweep](images/max_inventory_spread.png)
-```
 
 ---
 
